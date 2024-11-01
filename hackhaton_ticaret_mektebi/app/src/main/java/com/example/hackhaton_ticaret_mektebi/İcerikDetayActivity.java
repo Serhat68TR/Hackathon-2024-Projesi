@@ -71,7 +71,7 @@ public class İcerikDetayActivity extends AppCompatActivity {
             userID = user.getUid();
             Log.d("Deneme0", userID);
             // Retrieve User information from Firebase Database
-            DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users").child(userID);
+            DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("te").child(userID);
             userRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {

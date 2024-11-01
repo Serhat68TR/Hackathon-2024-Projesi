@@ -5,12 +5,10 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.text.TextUtils;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -21,6 +19,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
+import com.example.hackhaton_ticaret_mektebi.Models.Student;
 import com.example.hackhaton_ticaret_mektebi.Models.Teacher;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -35,47 +34,39 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
 import java.util.UUID;
-import java.util.UUID; // UUID sınıfını içeri aktarın
-public class OgretmenArayuzActivity extends AppCompatActivity {
+
+public class OgrenciArayuzActivity extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST = 1;
     private Uri imageUri;
     private ImageView userProfilePictureImageView, ogretmen_profil_foto;
     private DatabaseReference userDatabaseRef;
     String userID;
-    String userName;
+    String userName,bolumAdi;
     FirebaseUser user;
+    TextView ogrenci_bolum_ad,ogrenci_arayuz_ad_soyad_text;
     // FirebaseAuth nesnesi oluşturuluyor
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    Button ogr_ders_mufredati_ekle_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.ogretmen_arayuz_activity);
+        setContentView(R.layout.ogrenci_arayuz_activity);
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.ogretmen_arayuz), (v, insets) -> {
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.ogrenci_arayuz), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
         getUserInfoFromDatabase();
 
-        ogr_ders_mufredati_ekle_btn = findViewById(R.id.ogr_ders_mufredati_ekle_btn);
-        userProfilePictureImageView = findViewById(R.id.ogretmen_arayuz_profil);
-        Button changeProfilePicButton = findViewById(R.id.ogr_pp_degistir_btn);
-        ogretmen_profil_foto = findViewById(R.id.ogretmen_profil_foto);
+        ogrenci_bolum_ad =findViewById(R.id.ogrenci_bolum_ad);
+        ogrenci_arayuz_ad_soyad_text =findViewById(R.id.ogrenci_arayuz_ad_soyad_text);
+        userProfilePictureImageView = findViewById(R.id.ogrenci_arayuz_profil);
+        Button changeProfilePicButton = findViewById(R.id.ogrenci_pp_degistir_btn);
+        ogretmen_profil_foto = findViewById(R.id.ogrenci_pp);
 
         changeProfilePicButton.setOnClickListener(v -> openGallery());
-
-        ogr_ders_mufredati_ekle_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(OgretmenArayuzActivity.this, DersMufredatiEkleActivity.class);
-                startActivity(intent);
-                finish(); // Kullanıcı geri basarsa login ekranına dönmesin diye
-            }
-        });
 
     }
 
@@ -86,19 +77,21 @@ public class OgretmenArayuzActivity extends AppCompatActivity {
         user = getCurrentUser();
         if (user != null) {
             userID = user.getUid();
-            Log.d("Deneme0", userID);
+
             // Veritabanından Teacher bilgilerini çekmek için
-            userDatabaseRef = FirebaseDatabase.getInstance().getReference("teachers").child(userID);
+            userDatabaseRef = FirebaseDatabase.getInstance().getReference("students").child(userID);
             userDatabaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    Teacher teacher = dataSnapshot.getValue(Teacher.class);
-                    if (teacher != null) {
-                        loadUserProfilePicture();  // Mevcut profil fotoğrafını yükle
-                        userName = teacher.getNameSurname();
+                    Student student = dataSnapshot.getValue(Student.class);
 
-                        Log.d("Deneme1", userID);
-                        Log.d("UserInfo", "User ID: " + userID + ", Name: " + userName);
+                    if (student != null) {
+                        loadUserProfilePicture();  // Mevcut profil fotoğrafını yükle
+                        userName = student.getNameSurname();
+                        bolumAdi = student.getUserDepartment();
+
+                        ogrenci_bolum_ad.setText(bolumAdi);
+                        ogrenci_arayuz_ad_soyad_text.setText(userName);
                     }
                 }
 
@@ -156,7 +149,7 @@ public class OgretmenArayuzActivity extends AppCompatActivity {
                 });
             }).addOnFailureListener(e -> {
                 Log.e("FirebaseError", "Resim yüklenirken hata oluştu: " + e.getMessage()); // Hata mesajını logla
-                Toast.makeText(OgretmenArayuzActivity.this, "Resim yüklenirken hata oluştu.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(OgrenciArayuzActivity.this, "Resim yüklenirken hata oluştu.", Toast.LENGTH_SHORT).show();
             });
         } else {
             Log.e("FirebaseAuth", "Kullanıcı oturumu kapalı."); // Kullanıcı oturumunun açık olup olmadığını kontrol et
@@ -164,13 +157,13 @@ public class OgretmenArayuzActivity extends AppCompatActivity {
     }
 
     private void updateProfilePictureInDatabase(String userId, String profilePictureURL) {
-        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("teachers").child(userId);
+        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("students").child(userId);
         dbRef.child("profilePictureURL").setValue(profilePictureURL)
                 .addOnSuccessListener(aVoid -> {
-                    Toast.makeText(OgretmenArayuzActivity.this, "Profil resmi başarıyla güncellendi!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(OgrenciArayuzActivity.this, "Profil resmi başarıyla güncellendi!", Toast.LENGTH_SHORT).show();
                 })
                 .addOnFailureListener(e -> {
-                    Toast.makeText(OgretmenArayuzActivity.this, "Profil resmi güncellenirken hata oluştu.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(OgrenciArayuzActivity.this, "Profil resmi güncellenirken hata oluştu.", Toast.LENGTH_SHORT).show();
                 });
         Log.d("ProfilePictureURL", "URL: " + profilePictureURL);
     }
@@ -182,8 +175,8 @@ public class OgretmenArayuzActivity extends AppCompatActivity {
                 String profilePictureURL = snapshot.getValue(String.class);
                 Log.d("ProfilePictureURL", "Yüklenmeye çalışılan URL: " + profilePictureURL); // URL'yi logla
                 if (profilePictureURL != null) {
-                    Glide.with(OgretmenArayuzActivity.this).load(profilePictureURL).into(userProfilePictureImageView);
-                    Glide.with(OgretmenArayuzActivity.this).load(profilePictureURL).into(ogretmen_profil_foto);
+                    Glide.with(OgrenciArayuzActivity.this).load(profilePictureURL).into(userProfilePictureImageView);
+                    Glide.with(OgrenciArayuzActivity.this).load(profilePictureURL).into(ogretmen_profil_foto);
                 } else {
                     Log.e("ImageLoadError", "Profil resmi URL'si null."); // URL'nin null olup olmadığını kontrol et
                 }
@@ -204,4 +197,3 @@ public class OgretmenArayuzActivity extends AppCompatActivity {
 
 
 }
-

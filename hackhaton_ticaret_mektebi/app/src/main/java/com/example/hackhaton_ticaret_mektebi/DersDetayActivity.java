@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -13,8 +14,10 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.bumptech.glide.Glide;
 import com.example.hackhaton_ticaret_mektebi.Adapters.MyAdapter;
 import com.example.hackhaton_ticaret_mektebi.Models.Content;
+import com.example.hackhaton_ticaret_mektebi.Models.Student;
 import com.example.hackhaton_ticaret_mektebi.Models.Teacher;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -33,6 +36,7 @@ public class DersDetayActivity extends AppCompatActivity {
     FirebaseUser user;
     String userID;
     String userName;
+    ImageView ders_detay_pp;
     String teacherID,teacherName,nameID;
     TextView ders_detay_ad_soyad_text;
     String ders_detay_dersin_adi_str, ders_detay_ders_baslama_saati_str, ders_detay_ders_bitis_saati_str, ders_detay_ders_tarihi_str;
@@ -48,6 +52,8 @@ public class DersDetayActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        ders_detay_pp=findViewById(R.id.ders_detay_pp);
+
 
         ders_detay_dersin_adi_dt = findViewById(R.id.ders_detay_dersin_adi_dt);
         ders_detay_dersin_hocasi_dt = findViewById(R.id.ders_detay_dersin_hocasi_dt);
@@ -78,23 +84,63 @@ public class DersDetayActivity extends AppCompatActivity {
         getUserInfoFromDatabase();
         getCourseDetailFromDatabase();
     }
-
     public void getUserInfoFromDatabase() {
         user = getCurrentUser();
         if (user != null) {
             userID = user.getUid();
-            Log.d("Deneme0",userID);
-            // Veritabanından Teacher bilgilerini çekmek için
-            DatabaseReference ders_detay_ref = FirebaseDatabase.getInstance().getReference("teachers").child(userID);
-            ders_detay_ref.addListenerForSingleValueEvent(new ValueEventListener() {
+
+            // Önce teachers düğümünde kontrol edelim
+            DatabaseReference teacherRef = FirebaseDatabase.getInstance().getReference("teachers").child(userID);
+            teacherRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    Teacher teacher = dataSnapshot.getValue(Teacher.class);
-                    if (teacher != null) {
-                        userName = teacher.getNameSurname();
-                        ders_detay_ad_soyad_text.setText("Hoşgeldin" + " " +userName);
-                        Log.d("Deneme1",userID);
-                        Log.d("UserInfo", "User ID: " + userID + ", Name: " + userName);
+                    if (dataSnapshot.exists()) {
+                        // Kullanıcı teacher düğümündeyse
+                        Teacher teacher = dataSnapshot.getValue(Teacher.class);
+                        if (teacher != null) {
+
+                            String userName = teacher.getNameSurname();
+                            String userDepartment = teacher.getUserDepartment();
+                            String userPhotoUrl = teacher.getProfilePictureURL();
+                            if (userPhotoUrl != null) {
+                                Glide.with(DersDetayActivity.this).load(userPhotoUrl).into(ders_detay_pp);
+                            } else {
+                                Log.e("ImageLoadError", "Profil resmi URL'si null."); // URL'nin null olup olmadığını kontrol et
+                            }
+                            ders_detay_ad_soyad_text.setText(userName);
+                            Log.d("UserInfo", "Teacher - User ID: " + userID + ", Name: " + userName + ", Department: " + userDepartment + ", Photo URL: " + userPhotoUrl);
+                        }
+                    } else {
+                        // Eğer teacher düğümünde değilse, students düğümünü kontrol et
+                        DatabaseReference studentRef = FirebaseDatabase.getInstance().getReference("students").child(userID);
+                        studentRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot studentSnapshot) {
+                                if (studentSnapshot.exists()) {
+                                    // Kullanıcı student düğümündeyse
+                                    Student student = studentSnapshot.getValue(Student.class);
+                                    if (student != null) {
+                                        String userName = student.getNameSurname();
+                                        String userClass = student.getUserDepartment();
+                                        String userPhotoUrl = student.getProfilePictureURL();
+                                        if (userPhotoUrl != null) {
+                                            Glide.with(DersDetayActivity.this).load(userPhotoUrl).into(ders_detay_pp);
+                                        } else {
+                                            Log.e("ImageLoadError", "Profil resmi URL'si null."); // URL'nin null olup olmadığını kontrol et
+                                        }
+                                        ders_detay_ad_soyad_text.setText(userName);
+                                        Log.d("UserInfo", "Student - User ID: " + userID + ", Name: " + userName + ", Class: " + userClass + ", Photo URL: " + userPhotoUrl);
+                                    }
+                                } else {
+                                    Log.d("UserInfo", "Kullanıcı ne öğretmen ne de öğrenci.");
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+                                Log.e("UserInfo", "Error: " + databaseError.getMessage());
+                            }
+                        });
                     }
                 }
 
@@ -106,12 +152,15 @@ public class DersDetayActivity extends AppCompatActivity {
         } else {
             Log.d("UserInfo", "No user is signed in.");
         }
+
+
     }
 
     public void getCourseDetailFromDatabase() {
         // Firebase veritabanı referansı
         DatabaseReference ders_detay_ref2 = FirebaseDatabase.getInstance().getReference("courses");
         DatabaseReference ders_detay_hoca_name = FirebaseDatabase.getInstance().getReference("teachers");
+
 
         ders_detay_hoca_name.addValueEventListener(new ValueEventListener() {
             @Override

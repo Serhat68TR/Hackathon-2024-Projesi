@@ -36,6 +36,13 @@
         <activity android:name=".YeniIcerikPaylasActivity">
 
         </activity>
+        <activity android:name=".OgrenciArayuzActivity">
+
+        </activity>
+
+        <activity android:name=".DersMufredatiEkleActivity">
+
+        </activity>
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
