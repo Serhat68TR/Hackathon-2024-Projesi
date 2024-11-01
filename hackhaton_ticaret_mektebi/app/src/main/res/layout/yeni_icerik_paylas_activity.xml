@@ -80,12 +80,13 @@
                         android:layout_height="wrap_content"
                         android:text="İÇERİĞİN ADI :" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/yeni_icerik_icerigin_adi_dt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Yapay Zeka Ders Notları" />
+                        android:hint="Yazınız"
+                        android:text="" />
 
                 </LinearLayout>
 
@@ -106,7 +107,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="ÖĞR.GÖR.Serhat KAYA" />
+                        android:text="A" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -122,12 +123,12 @@
                         android:layout_weight="1"
                         android:text="PAYLAŞILAN TARİH :" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/yeni_icerik_paylasilan_tarih_dt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="23-10-2024" />
+                        android:text="01-12-2024" />
 
                 </LinearLayout>
 
@@ -144,10 +145,11 @@
                         android:layout_weight="1"
                         android:text="İÇERİK BÖLÜM ADI :" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/yeni_icerik_icerik_bolum_adi_dt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="12sp"
                         android:layout_weight="1"
                         android:text="BİLGİSAYAR PROGRAMCILIĞI" />
                 </LinearLayout>
@@ -169,20 +171,44 @@
                         android:id="@+id/yeni_icerik_icerik_sayfa_boyut_dt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="22 Sayfa - 10MB" />
+                        android:layout_weight="1" />
                 </LinearLayout>
 
-                <Button
-                    android:id="@+id/yeni_icerik_paylas_btn"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="Paylaş" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/yeni_icerik_paylas_dosyaSec"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:text="Dosya Seç" />
+                    <!-- Boş alan bırakmak için View -->
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <Button
+                        android:id="@+id/yeni_icerik_paylas_btn"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:scrollIndicators="right"
+                        android:text="Paylaş" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lütfen Tarih ve Saat Bilgilerini Belirtilen Formatta Giriniz." />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

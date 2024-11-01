@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import android.app.AlertDialog;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,7 +20,6 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
 import com.example.hackhaton_ticaret_mektebi.Models.Student;
-import com.example.hackhaton_ticaret_mektebi.Models.Teacher;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -68,10 +67,18 @@ public class OgrenciArayuzActivity extends AppCompatActivity {
 
         changeProfilePicButton.setOnClickListener(v -> openGallery());
 
+        Button ogrenciSifremiUnuttumBtn = findViewById(R.id.ogretmen_sifremi_unuttum_btn);
+
+        ogrenciSifremiUnuttumBtn.setOnClickListener(view -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Şifre Sıfırlama Yardımı");
+            builder.setMessage("Şifrenizi değiştirmek için bir yöneticiyle iletişime geçin.");
+            builder.setPositiveButton("Tamam", (dialog, which) -> dialog.dismiss());
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
+        });
+
     }
-
-
-
 
     public void getUserInfoFromDatabase() {
         user = getCurrentUser();

@@ -1,16 +1,16 @@
 package com.example.hackhaton_ticaret_mektebi;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -21,6 +21,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
+import com.example.hackhaton_ticaret_mektebi.Models.Student;
 import com.example.hackhaton_ticaret_mektebi.Models.Teacher;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -35,7 +36,7 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
 import java.util.UUID;
-import java.util.UUID; // UUID sınıfını içeri aktarın
+
 public class OgretmenArayuzActivity extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST = 1;
     private Uri imageUri;
@@ -47,6 +48,10 @@ public class OgretmenArayuzActivity extends AppCompatActivity {
     // FirebaseAuth nesnesi oluşturuluyor
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     Button ogr_ders_mufredati_ekle_btn;
+    Button ogr_yeni_icerik_paylas_btn;
+    TextView ogretmen_arayuz_ad_soyad_text;
+    TextView ogr_bolum_ad;
+    String userPhotoUrl,userDepartment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,11 +65,22 @@ public class OgretmenArayuzActivity extends AppCompatActivity {
             return insets;
         });
         getUserInfoFromDatabase();
-
+        ogretmen_arayuz_ad_soyad_text=findViewById(R.id.ogretmen_arayuz_ad_soyad_text);
+        ogr_bolum_ad=findViewById(R.id.ogr_bolum_ad);
         ogr_ders_mufredati_ekle_btn = findViewById(R.id.ogr_ders_mufredati_ekle_btn);
         userProfilePictureImageView = findViewById(R.id.ogretmen_arayuz_profil);
         Button changeProfilePicButton = findViewById(R.id.ogr_pp_degistir_btn);
         ogretmen_profil_foto = findViewById(R.id.ogretmen_profil_foto);
+        ogr_yeni_icerik_paylas_btn = findViewById(R.id.ogr_yeni_icerik_paylas_btn);
+        ogr_yeni_icerik_paylas_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(OgretmenArayuzActivity.this, YeniIcerikPaylasActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
 
         changeProfilePicButton.setOnClickListener(v -> openGallery());
 
@@ -73,32 +89,86 @@ public class OgretmenArayuzActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(OgretmenArayuzActivity.this, DersMufredatiEkleActivity.class);
                 startActivity(intent);
-                finish(); // Kullanıcı geri basarsa login ekranına dönmesin diye
             }
+        });
+
+        Button ogretmenSifremiUnuttumBtn = findViewById(R.id.ogretmen_sifremi_unuttum_btn);
+
+        ogretmenSifremiUnuttumBtn.setOnClickListener(view -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Şifre Sıfırlama Yardımı");
+            builder.setMessage("Şifrenizi değiştirmek için bir yöneticiyle iletişime geçin.");
+            builder.setPositiveButton("Tamam", (dialog, which) -> dialog.dismiss());
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
         });
 
     }
 
-
-
+    // Kullanıcı bilgilerini Firebase Realtime Database'den çeker
 
     public void getUserInfoFromDatabase() {
         user = getCurrentUser();
         if (user != null) {
             userID = user.getUid();
-            Log.d("Deneme0", userID);
-            // Veritabanından Teacher bilgilerini çekmek için
-            userDatabaseRef = FirebaseDatabase.getInstance().getReference("teachers").child(userID);
-            userDatabaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
+
+            // Önce teachers düğümünde kontrol edelim
+            DatabaseReference teacherRef = FirebaseDatabase.getInstance().getReference("teachers").child(userID);
+            teacherRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    Teacher teacher = dataSnapshot.getValue(Teacher.class);
-                    if (teacher != null) {
-                        loadUserProfilePicture();  // Mevcut profil fotoğrafını yükle
-                        userName = teacher.getNameSurname();
+                    if (dataSnapshot.exists()) {
+                        // Kullanıcı teacher düğümündeyse
+                        Teacher teacher = dataSnapshot.getValue(Teacher.class);
+                        if (teacher != null) {
 
-                        Log.d("Deneme1", userID);
-                        Log.d("UserInfo", "User ID: " + userID + ", Name: " + userName);
+                            userName = teacher.getNameSurname();
+                            userDepartment = teacher.getUserDepartment();
+                            userPhotoUrl = teacher.getProfilePictureURL();
+
+                            ogr_bolum_ad.setText(userDepartment);
+                            ogretmen_arayuz_ad_soyad_text.setText(userName);
+                            if (userPhotoUrl != null) {
+                                Glide.with(OgretmenArayuzActivity.this).load(userPhotoUrl).into(userProfilePictureImageView);
+                                Glide.with(OgretmenArayuzActivity.this).load(userPhotoUrl).into(ogretmen_profil_foto);
+                            } else {
+                                Log.e("ImageLoadError", "Profil resmi URL'si null."); // URL'nin null olup olmadığını kontrol et
+                            }
+                            ogretmen_arayuz_ad_soyad_text.setText("Hoşgeldin Öğretmenim"+" " + userName);
+                            Log.d("UserInfo", "Teacher - User ID: " + userID + ", Name: " + userName + ", Department: " + userDepartment + ", Photo URL: " + userPhotoUrl);
+                        }
+                    } else {
+                        // Eğer teacher düğümünde değilse, students düğümünü kontrol et
+                        DatabaseReference studentRef = FirebaseDatabase.getInstance().getReference("students").child(userID);
+                        studentRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot studentSnapshot) {
+                                if (studentSnapshot.exists()) {
+                                    // Kullanıcı student düğümündeyse
+                                    Student student = studentSnapshot.getValue(Student.class);
+                                    if (student != null) {
+                                        userName = student.getNameSurname();
+                                        userDepartment = student.getUserDepartment();
+                                        userPhotoUrl = student.getProfilePictureURL();
+                                        if (userPhotoUrl != null) {
+                                            Glide.with(OgretmenArayuzActivity.this).load(userPhotoUrl).into(userProfilePictureImageView);
+                                            Glide.with(OgretmenArayuzActivity.this).load(userPhotoUrl).into(ogretmen_profil_foto);
+                                        } else {
+                                            Log.e("ImageLoadError", "Profil resmi URL'si null."); // URL'nin null olup olmadığını kontrol et
+                                        }
+                                        ogretmen_arayuz_ad_soyad_text.setText("Hoşgeldin Öğrencim "+ " " + userName);
+                                        Log.d("UserInfo", "Student - User ID: " + userID + ", Name: " + userName + ", Class: " + ", Photo URL: " + userPhotoUrl);
+                                    }
+                                } else {
+                                    Log.d("UserInfo", "Kullanıcı ne öğretmen ne de öğrenci.");
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+                                Log.e("UserInfo", "Error: " + databaseError.getMessage());
+                            }
+                        });
                     }
                 }
 
@@ -111,6 +181,7 @@ public class OgretmenArayuzActivity extends AppCompatActivity {
             Log.d("UserInfo", "No user is signed in.");
         }
     }
+
 
     private void openGallery() {
         Intent intent = new Intent();

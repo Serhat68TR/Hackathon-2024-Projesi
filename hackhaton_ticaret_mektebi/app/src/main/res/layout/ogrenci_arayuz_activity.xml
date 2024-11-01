@@ -80,12 +80,12 @@
                 android:text="Profil Resmini Değiştir" />
 
             <Button
-                android:id="@+id/ogrenci_yeni_icerik_paylas_btn"
+                android:id="@+id/ogretmen_sifremi_unuttum_btn"
                 android:layout_width="200dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
                 android:layout_marginBottom="10dp"
-                android:text="Yeni İçerik Paylaş" />
+                android:text="Şifremi Unuttum" />
 
         </LinearLayout>
 

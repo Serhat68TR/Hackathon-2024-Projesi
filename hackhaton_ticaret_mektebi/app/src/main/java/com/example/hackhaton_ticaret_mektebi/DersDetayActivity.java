@@ -6,6 +6,7 @@ import android.util.Log;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -35,7 +36,10 @@ public class DersDetayActivity extends AppCompatActivity {
     */
     FirebaseUser user;
     String userID;
+    private DatabaseReference databaseReference;
     String userName;
+    String courseProvider;
+
     ImageView ders_detay_pp;
     String teacherID,teacherName,nameID;
     TextView ders_detay_ad_soyad_text;
@@ -61,29 +65,51 @@ public class DersDetayActivity extends AppCompatActivity {
         ders_detay_ders_baslama_saati_dt = findViewById(R.id.ders_detay_ders_baslama_saati_dt);
         ders_detay_ders_bitis_saati_dt = findViewById(R.id.ders_detay_ders_bitis_saati_dt);
         ders_detay_ad_soyad_text = findViewById(R.id.ders_detay_ad_soyad_text);
-        // Intent'ten verileri al
 
-        //bilgileri yazdırmayı düzenle
+        // Intent'ten gelen verileri al
         Intent intent = getIntent();
         String courseName = intent.getStringExtra("courseName");
         String courseDate = intent.getStringExtra("courseDate");
         String courseDepartment = intent.getStringExtra("courseDepartment");
         String courseStartTime = intent.getStringExtra("courseStartTime");
         String courseEndTime = intent.getStringExtra("courseEndTime");
-        String teacherID = intent.getStringExtra("teacherID");
+        String courseProviderID = intent.getStringExtra("teacherID");
 
+        // Firebase veritabanı referansı
+        databaseReference = FirebaseDatabase.getInstance().getReference("teachers");
 
-
+        // Ders bilgilerini doğrudan atayın
         ders_detay_dersin_adi_dt.setText(courseName);
         ders_detay_ders_tarihi_dt.setText(courseDate);
         ders_detay_ders_baslama_saati_dt.setText(courseStartTime);
         ders_detay_ders_bitis_saati_dt.setText(courseEndTime);
+
+        // teacherID'yi kullanarak öğretmenin adını almak için veritabanında arama yapın
+        databaseReference.child(courseProviderID).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    // Öğretmenin adını aldıktan sonra TextView'e ayarla
+                    String courseProvider = dataSnapshot.child("nameSurname").getValue(String.class);
+                    ders_detay_dersin_hocasi_dt.setText(courseProvider);
+                } else {
+                    Toast.makeText(DersDetayActivity.this, "Öğretmen bulunamadı.", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Toast.makeText(DersDetayActivity.this, "Veritabanı hatası: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
         getCurrentUser();
         getUserInfoFromDatabase();
         getCourseDetailFromDatabase();
     }
+
+
     public void getUserInfoFromDatabase() {
         user = getCurrentUser();
         if (user != null) {

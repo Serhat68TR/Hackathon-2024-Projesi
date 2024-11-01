@@ -96,7 +96,7 @@
                 android:text="Ders Müfredatı Ekle" />
 
             <Button
-                android:id="@+id/ogr_sifremi_degistir_btn"
+                android:id="@+id/ogretmen_sifremi_unuttum_btn"
                 android:layout_width="200dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center"

@@ -44,6 +44,7 @@
         android:layout_marginEnd="1dp"
         android:layout_marginBottom="25dp"
         android:ems="10"
+        android:hint="E-Posta Adresi"
         android:inputType="textEmailAddress"
         app:layout_constraintBottom_toTopOf="@+id/password_login"
         app:layout_constraintEnd_toEndOf="parent"
@@ -55,40 +56,28 @@
         android:id="@+id/password_login"
         android:layout_width="210dp"
         android:layout_height="45dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="300dp"
         android:ems="10"
+        android:hint="Parola"
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/email_login" />
-
-    <TextView
-        android:id="@+id/sifremi_u_login"
-        android:layout_width="114dp"
-        android:layout_height="19dp"
-        android:layout_marginStart="76dp"
-        android:layout_marginTop="300dp"
-        android:layout_marginEnd="38dp"
-        android:text="Şifremi Unuttum :("
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/giris_yap_login"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/giris_yap_login"
         android:layout_width="105dp"
         android:layout_height="48dp"
-        android:layout_marginStart="37dp"
         android:layout_marginTop="300dp"
-        android:layout_marginEnd="78dp"
+        android:layout_marginEnd="152dp"
         android:text="Giriş Yap"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/sifremi_u_login"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.501" />
 
     <TextView
         android:id="@+id/textView3"
@@ -102,5 +91,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/main_activity_sifremi_unuttum_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Şifremi Unuttum :("
+        app:layout_constraintTop_toBottomOf="@+id/password_login"
+        tools:layout_editor_absoluteX="123dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

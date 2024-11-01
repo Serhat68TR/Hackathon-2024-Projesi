@@ -1,5 +1,6 @@
 package com.example.hackhaton_ticaret_mektebi;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -62,6 +63,18 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        Button ogretmenSifremiUnuttumBtn = findViewById(R.id.main_activity_sifremi_unuttum_btn);
+
+        ogretmenSifremiUnuttumBtn.setOnClickListener(view -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Şifre Sıfırlama Yardımı");
+            builder.setMessage("Şifrenizi değiştirmek için bir yöneticiyle iletişime geçin.");
+            builder.setPositiveButton("Tamam", (dialog, which) -> dialog.dismiss());
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
+        });
+
     }
 
     // Kullanıcı giriş fonksiyonu
