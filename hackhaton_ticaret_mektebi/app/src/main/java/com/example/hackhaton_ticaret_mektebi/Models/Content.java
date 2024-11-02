@@ -1,32 +1,43 @@
 package com.example.hackhaton_ticaret_mektebi.Models;
 
 public class Content {
-    private String contentID;
+    //private String contentID;
     private String contentName;
     private String contentProvider;
     private String contentSharedDate;
     private String contentDepartment;
     private String contentSize;
+    private String contentURL;
 
     public Content() {
         // Default constructor required for calls to DataSnapshot.getValue(Content.class)
     }
 
-    public Content(String contentID, String contentName, String contentProvider, String contentSharedDate, String contentDepartment, String contentSize) {
-        this.contentID = contentID;
+    public Content(String contentDepartment, String contentName, String contentProvider, String contentSharedDate, String contentSize, String contentURL) {
+        //this.contentID = contentID;
+        this.contentDepartment = contentDepartment;
         this.contentName = contentName;
         this.contentProvider = contentProvider;
         this.contentSharedDate = contentSharedDate;
-        this.contentDepartment = contentDepartment;
         this.contentSize = contentSize;
+        this.contentURL = contentURL;
     }
-
+    /*
     public String getContentID() {
         return contentID;
     }
 
     public void setContentID(String contentID) {
         this.contentID = contentID;
+    }
+
+    */
+    public String getContentURL() {
+        return contentURL;
+    }
+
+    public void setContentURL(String contentURL) {
+        this.contentURL = contentURL;
     }
 
     public String getContentName() {

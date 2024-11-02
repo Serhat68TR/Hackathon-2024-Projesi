@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +18,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
+import com.example.hackhaton_ticaret_mektebi.Models.Content;
+import com.example.hackhaton_ticaret_mektebi.Models.Course;
 import com.example.hackhaton_ticaret_mektebi.Models.Student;
 import com.example.hackhaton_ticaret_mektebi.Models.Teacher;
 import com.google.firebase.auth.FirebaseAuth;
@@ -39,10 +42,11 @@ public class DersMufredatiEkleActivity extends AppCompatActivity {
     Button ders_mufredati_paylas_btn;
     TextView ders_mufredati_ad_soyad_text;
     String userDepartment;
+    private DatabaseReference courseDatabaseRef;
     String userPhotoUrl;
     ImageButton gemini;
     ImageView ders_mufredati_pp;
-    EditText ders_mufredati_dersin_adi_dt, ders_mufredati_ders_baslama_adi_dt, ders_mufredati_ders_bitis_dt;
+    EditText ders_mufredati_dersin_adi_dt, ders_mufredati_ders_baslama_adi_dt, ders_mufredati_ders_bitis_dt, ders_mufredati_dersin_tarihi_dt;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,14 +68,27 @@ public class DersMufredatiEkleActivity extends AppCompatActivity {
         });
 
       ders_mufredati_pp = findViewById(R.id.ders_mufredati_pp);
-      ders_mufredati_dersin_adi_dt = findViewById(R.id.ders_mufredati_dersin_adi_dt);
+      ders_mufredati_dersin_tarihi_dt = findViewById(R.id.ders_mufredati_dersin_tarihi_dt);
       ders_mufredati_ders_baslama_adi_dt = findViewById(R.id.ders_mufredati_ders_baslama_adi_dt);
       ders_mufredati_ders_bitis_dt = findViewById(R.id.ders_mufredati_ders_bitis_dt);
       ders_mufredati_dersin_hocasi_dt = findViewById(R.id.ders_mufredati_dersin_hocasi_dt);
-      ders_mufredati_ad_soyad_text=findViewById(R.id.ders_mufredati_ad_soyad_text);
+
+      ders_mufredati_ad_soyad_text=findViewById(R.id.ders_mufredati_ad_soyad_text); // BURASI HATALI. DEPARTMAN ADI ÇEKİLECEK.
+
       ders_mufredati_paylas_btn = findViewById(R.id.ders_mufredati_paylas_btn);
-        getUserInfoFromDatabase();
-        ders_mufredati_paylas_btn.setOnClickListener(new View.OnClickListener() {
+
+      courseDatabaseRef = FirebaseDatabase.getInstance().getReference("courses");
+
+      //değişiklikler başlıyor
+
+
+        //değişiklikler bitiyor
+      getUserInfoFromDatabase();
+
+      ders_mufredati_paylas_btn.setOnClickListener(v -> shareNewCourseFromDatabase());
+
+        /*
+         ders_mufredati_paylas_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Firebase veritabanı referansını al
@@ -129,11 +146,29 @@ public class DersMufredatiEkleActivity extends AppCompatActivity {
                     }
                 });
             }
-        });
-
+         });
+        */
 
     }
 
+    public void shareNewCourseFromDatabase() {
+        String courseName = ders_mufredati_dersin_adi_dt.getText().toString().trim();
+        String courseProvider = ders_mufredati_dersin_hocasi_dt.getText().toString().trim();
+        String courseDate = ders_mufredati_dersin_tarihi_dt.getText().toString().trim();
+        String courseEndTime = ders_mufredati_ders_bitis_dt.getText().toString().trim();
+        String courseDepartment = ders_mufredati_ad_soyad_text.getText().toString().trim(); // COURSEDEPARTMAN == OTURUM AÇAN HOCANIN DEPARTMANI
+        String courseStartTime = ders_mufredati_ders_baslama_adi_dt.getText().toString().trim();
+
+        if (!courseName.isEmpty() && !courseProvider.isEmpty() && !courseDate.isEmpty() && !courseDepartment.isEmpty() && !courseStartTime.isEmpty() && !courseEndTime.isEmpty()) {
+            String courseId = courseDatabaseRef.push().getKey();
+            Course course = new Course(courseDate, courseDepartment, courseEndTime, courseName, courseStartTime, courseProvider);
+            courseDatabaseRef.child(courseId).setValue(course)
+                    .addOnSuccessListener(aVoid -> Toast.makeText(DersMufredatiEkleActivity.this, "Müfredat başarıyla paylaşıldı.", Toast.LENGTH_SHORT).show())
+                    .addOnFailureListener(e -> Toast.makeText(DersMufredatiEkleActivity.this, "Müfredat paylaşılırken hata oluştu.", Toast.LENGTH_SHORT).show());
+        } else {
+            Toast.makeText(this, "Tüm alanlar doldurulmalıdır.", Toast.LENGTH_SHORT).show();
+        }
+    }
 
     // Kullanıcı bilgilerini Firebase Realtime Database'den çeker
 

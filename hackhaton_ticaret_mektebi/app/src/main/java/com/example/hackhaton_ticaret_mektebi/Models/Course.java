@@ -1,7 +1,7 @@
 package com.example.hackhaton_ticaret_mektebi.Models;
 
 public class Course {
-    private String courseID;
+    //private String courseID;
     private String courseName;
     private String teacherID;
     private String courseDate;
@@ -12,14 +12,14 @@ public class Course {
         // Default constructor
     }
 
-    public Course(String courseID, String courseName, String teacherID, String courseDate, String courseStartTime, String courseEndTime, String courseDepartment) {
-        this.courseID = courseID;
-        this.courseName = courseName;
-        this.teacherID = teacherID;
+    public Course(String courseDate, String courseDepartment, String courseEndTime, String courseName, String courseStartTime, String teacherID) {
+        //this.courseID = courseID;
         this.courseDate = courseDate;
-        this.courseStartTime = courseStartTime;
-        this.courseEndTime = courseEndTime;
         this.courseDepartment = courseDepartment;
+        this.courseEndTime = courseEndTime;
+        this.courseName = courseName;
+        this.courseStartTime = courseStartTime;
+        this.teacherID = teacherID;
     }
 
     public String getCourseDepartment() {
@@ -29,7 +29,7 @@ public class Course {
     public void setCourseDepartment(String courseDepartment) {
         this.courseDepartment = courseDepartment;
     }
-
+    /*
     public String getCourseID() {
         return courseID;
     }
@@ -37,6 +37,9 @@ public class Course {
     public void setCourseID(String courseID) {
         this.courseID = courseID;
     }
+    */
+
+
 
     public String getCourseName() {
         return courseName;
