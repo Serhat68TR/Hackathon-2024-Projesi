@@ -43,6 +43,7 @@ public class GeminiNotActivity extends AppCompatActivity {
     private static final int WRITE_PERMISSION_REQUEST_CODE = 1000;
     private String apiKey = "AIzaSyAl49b9RagN8JXPPM86EcTg1tWcF37whmM";
     private String resultText;
+    String soru;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +57,7 @@ public class GeminiNotActivity extends AppCompatActivity {
 
         button.setOnClickListener(v -> {
             Toast.makeText(GeminiNotActivity.this, "Butona tıklandı!", Toast.LENGTH_SHORT).show();
-            String soru = ozet.getText().toString();
+            soru = ozet.getText().toString();
             generateContentAndCreatePDF(soru);
         });
 
@@ -102,7 +103,7 @@ public class GeminiNotActivity extends AppCompatActivity {
     private void createPDF() {
         try {
             String pdfPath = getExternalFilesDir(null).toString();
-            File file = new File(pdfPath, "generatedContent.pdf");
+            File file = new File(pdfPath, soru.substring(0,7)+".pdf");
             PdfWriter writer = new PdfWriter(file);
             PdfDocument pdfDocument = new PdfDocument(writer);
             Document document = new Document(pdfDocument);
