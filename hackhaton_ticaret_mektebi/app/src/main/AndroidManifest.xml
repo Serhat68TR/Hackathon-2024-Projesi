@@ -7,11 +7,14 @@
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
-        android:label="hackhaton_ticaret_mektebi"
+        android:label="Hackhaton Ticaret Mektebi"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Hackhaton_ticaret_mektebi"
         tools:targetApi="31">
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" />
         <activity
             android:name=".GeminiQuizActivity"
             android:exported="false" />
@@ -22,7 +25,7 @@
             android:name=".GeminiActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
