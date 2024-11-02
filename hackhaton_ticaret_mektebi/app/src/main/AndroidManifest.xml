@@ -13,6 +13,15 @@
         android:theme="@style/Theme.Hackhaton_ticaret_mektebi"
         tools:targetApi="31">
         <activity
+            android:name=".GeminiQuizActivity"
+            android:exported="false" />
+        <activity
+            android:name=".GeminiNotActivity"
+            android:exported="false" />
+        <activity
+            android:name=".GeminiActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
@@ -21,28 +30,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".UserMainActivity">
+        <activity android:name=".UserMainActivity" />
+        <activity android:name=".İcerikDetayActivity" />
+        <activity android:name=".DersDetayActivity" />
+        <activity android:name=".OgretmenArayuzActivity" />
+        <activity android:name=".YeniIcerikPaylasActivity" />
+        <activity android:name=".OgrenciArayuzActivity" />
+        <activity android:name=".DersMufredatiEkleActivity" />
 
-        </activity>
-        <activity android:name=".İcerikDetayActivity">
-
-        </activity>
-        <activity android:name=".DersDetayActivity">
-
-        </activity>
-        <activity android:name=".OgretmenArayuzActivity">
-
-        </activity>
-        <activity android:name=".YeniIcerikPaylasActivity">
-
-        </activity>
-        <activity android:name=".OgrenciArayuzActivity">
-
-        </activity>
-
-        <activity android:name=".DersMufredatiEkleActivity">
-
-        </activity>
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

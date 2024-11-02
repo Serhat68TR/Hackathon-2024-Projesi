@@ -51,6 +51,7 @@ public class UserMainActivity extends AppCompatActivity {
     TextView ad_soyad_uma,ders_mu_uma,s_p_icerikler_uma;
     String userID;
     Button btn;
+    ImageButton gemini;
 
     List<Content> contentItemList = new ArrayList<>();
     List<Course> courseItemList=new ArrayList<>();
@@ -68,6 +69,15 @@ public class UserMainActivity extends AppCompatActivity {
             return insets;
         });
         user_main_pp=findViewById(R.id.user_main_pp);
+        gemini=findViewById(R.id.user_main_yapay_zeka);
+        gemini.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(UserMainActivity.this, GeminiActivity.class);
+                startActivity(intent);
+            }
+        });
+
         user_main_yapay_zeka=findViewById(R.id.user_main_yapay_zeka);
         ad_soyad_uma=findViewById(R.id.user_main_ad_soyad);
         // RecyclerView'a referans ver

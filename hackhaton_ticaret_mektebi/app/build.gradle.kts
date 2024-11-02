@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.hackhaton_ticaret_mektebi"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -25,6 +25,10 @@ android {
                 "proguard-rules.pro"
             )
         }
+        packagingOptions {
+            exclude("com/itextpdf/io/font/cmap_info.txt")
+            exclude("com/itextpdf/io/font/cmap/*")
+        }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -33,6 +37,18 @@ android {
 }
 
 dependencies {
+
+    // add the dependency for the Google AI client SDK for Android
+    implementation("com.google.ai.client.generativeai:generativeai:0.7.0")
+
+    // Required for one-shot operations (to use `ListenableFuture` from Guava Android)
+    implementation("com.google.guava:guava:31.0.1-android")
+
+    // Required for streaming operations (to use `Publisher` from Reactive Streams)
+    implementation("org.reactivestreams:reactive-streams:1.0.4")
+
+    implementation("com.itextpdf:itext7-core:7.1.3")
+
 // Firebase Realtime Database
     implementation ("com.google.firebase:firebase-database:20.3.0")
 
