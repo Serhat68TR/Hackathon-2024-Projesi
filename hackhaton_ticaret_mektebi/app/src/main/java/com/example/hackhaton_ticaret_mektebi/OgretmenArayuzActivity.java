@@ -9,6 +9,7 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -52,6 +53,7 @@ public class OgretmenArayuzActivity extends AppCompatActivity {
     TextView ogretmen_arayuz_ad_soyad_text;
     TextView ogr_bolum_ad;
     String userPhotoUrl,userDepartment;
+    ImageButton gemini;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +65,15 @@ public class OgretmenArayuzActivity extends AppCompatActivity {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
+        });
+
+        gemini=findViewById(R.id.ogr_yapay_btn);
+        gemini.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(OgretmenArayuzActivity.this, GeminiActivity.class);
+                startActivity(intent);
+            }
         });
         getUserInfoFromDatabase();
         ogretmen_arayuz_ad_soyad_text=findViewById(R.id.ogretmen_arayuz_ad_soyad_text);

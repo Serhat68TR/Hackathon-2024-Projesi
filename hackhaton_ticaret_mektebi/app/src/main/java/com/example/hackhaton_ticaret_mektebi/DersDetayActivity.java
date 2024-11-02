@@ -3,7 +3,9 @@ package com.example.hackhaton_ticaret_mektebi;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,7 +41,7 @@ public class DersDetayActivity extends AppCompatActivity {
     private DatabaseReference databaseReference;
     String userName;
     String courseProvider;
-
+    ImageButton gemini;
     ImageView ders_detay_pp;
     String teacherID,teacherName,nameID;
     TextView ders_detay_ad_soyad_text;
@@ -55,6 +57,14 @@ public class DersDetayActivity extends AppCompatActivity {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
+        });
+        gemini=findViewById(R.id.ders_detay_yapay_zeka);
+        gemini.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DersDetayActivity.this, GeminiActivity.class);
+                startActivity(intent);
+            }
         });
         ders_detay_pp=findViewById(R.id.ders_detay_pp);
 

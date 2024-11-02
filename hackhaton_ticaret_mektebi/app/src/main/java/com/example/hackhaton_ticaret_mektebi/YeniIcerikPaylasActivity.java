@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -63,6 +64,7 @@ public class YeniIcerikPaylasActivity extends AppCompatActivity {
     String userPhotoUrl;
     FirebaseUser user;
     String userID;
+    ImageButton gemini;
 
 
     @Override
@@ -75,6 +77,14 @@ public class YeniIcerikPaylasActivity extends AppCompatActivity {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
+        });
+        gemini=findViewById(R.id.yeni_icerik_yapay_zeka);
+        gemini.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(YeniIcerikPaylasActivity.this, GeminiActivity.class);
+                startActivity(intent);
+            }
         });
         yeni_icerik_pp = findViewById(R.id.yeni_icerik_pp);
         getUserInfoFromDatabase();

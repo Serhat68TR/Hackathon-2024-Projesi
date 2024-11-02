@@ -7,7 +7,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,6 +46,7 @@ public class İcerikDetayActivity extends AppCompatActivity {
     private DatabaseReference contentDatabaseRef;
     private String contentName;
     ImageView icerik_detay_pp;
+    ImageButton gemini;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +58,14 @@ public class İcerikDetayActivity extends AppCompatActivity {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
+        });
+        gemini=findViewById(R.id.imageButton);
+        gemini.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(İcerikDetayActivity.this, GeminiActivity.class);
+                startActivity(intent);
+            }
         });
         // View tanımlamaları
         icerik_detay_pp = findViewById(R.id.icerik_detay_pp);

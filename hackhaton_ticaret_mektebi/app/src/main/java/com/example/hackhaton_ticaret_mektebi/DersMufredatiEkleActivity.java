@@ -40,6 +40,7 @@ public class DersMufredatiEkleActivity extends AppCompatActivity {
     TextView ders_mufredati_ad_soyad_text;
     String userDepartment;
     String userPhotoUrl;
+    ImageButton gemini;
     ImageView ders_mufredati_pp;
     EditText ders_mufredati_dersin_adi_dt, ders_mufredati_ders_baslama_adi_dt, ders_mufredati_ders_bitis_dt;
     @Override
@@ -53,7 +54,14 @@ public class DersMufredatiEkleActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
+        gemini=findViewById(R.id.ders_mufredati_yapay_zeka);
+        gemini.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DersMufredatiEkleActivity.this, GeminiActivity.class);
+                startActivity(intent);
+            }
+        });
 
       ders_mufredati_pp = findViewById(R.id.ders_mufredati_pp);
       ders_mufredati_dersin_adi_dt = findViewById(R.id.ders_mufredati_dersin_adi_dt);

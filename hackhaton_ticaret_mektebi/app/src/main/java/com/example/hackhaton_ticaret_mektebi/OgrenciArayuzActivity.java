@@ -6,7 +6,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,6 +47,7 @@ public class OgrenciArayuzActivity extends AppCompatActivity {
     TextView ogrenci_bolum_ad,ogrenci_arayuz_ad_soyad_text;
     // FirebaseAuth nesnesi oluşturuluyor
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    ImageButton gemini;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +59,15 @@ public class OgrenciArayuzActivity extends AppCompatActivity {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
+        });
+
+        gemini=findViewById(R.id.ogrenci_yapay_btn);
+        gemini.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(OgrenciArayuzActivity.this, GeminiActivity.class);
+                startActivity(intent);
+            }
         });
         getUserInfoFromDatabase();
 
