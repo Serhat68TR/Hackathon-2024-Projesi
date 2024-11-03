@@ -1,9 +1,9 @@
-**Öğrenci Destekli Soru Hazırlama ve Çıktı Alma Mobil Uygulaması**
+**Yapay Zeka Destekli Eğitim Takibi ve Araştırma Mobil Uygulaması**
 
 
 **Proje Amacı 🎯**
 
-Bu proje, öğrencilerin ders çalışmasını ve sınav hazırlığını kolaylaştırmak, gelecekteki derslerini ve öğretmenleri tarafından paylaşılan içerikleri takip edebilmek amacıyla geliştirilen bir eğitim destekli mobil uygulamadır. Uygulama, kullanıcıların belirledikleri ders ve konuya özel olarak yapay zeka destekli sorular hazırlamalarına ve bu soruları PDF formatında çıktı almalarına olanak tanır.
+Bu proje, öğrencilerin ders çalışmasını ve sınav hazırlığını kolaylaştırmak, gelecekteki derslerini ve öğretmenleri tarafından paylaşılan içerikleri takip edebilmek amacıyla geliştirilen bir yapay zeka destekli mobil uygulamadır. Uygulama, kullanıcıların belirledikleri ders ve konuya özel olarak yapay zeka destekli sorular hazırlamalarına ve bu soruları PDF formatında çıktı almalarına olanak tanır.
 
 ---
 
@@ -53,67 +53,81 @@ Yapay Zeka Desteği: Gemini AI
 
 Kullanıcı odaklı bir giriş arayüzüdür. Kullanıcılar, e-posta ve şifre bilgilerini girerek uygulamaya erişim sağlayabilir. Şifresini unutan kullanıcılar "Şifremi Unuttum" butonuna tıklayarak yöneticilerle iletişime geçebilir.
 
-![GirisYap](https://github.com/user-attachments/assets/2f835d3f-81f4-4397-827f-3872ca15555a)
+<img width="300" alt="GirisYap" src="https://github.com/user-attachments/assets/7eeeba4a-d187-41d1-b89b-f7e0625afe7f">
 
 **- Öğretmen & Öğrenci Anasayfa Arayüzü**
 
 Giriş yapan kullanıcının adı ve profil resmi gösterilir. Öğretmenler ve öğrenciler, kendi bölümlerine ait ders ve içerikleri burada görebilir; "Detay" butonuna basarak detayları inceleyebilir veya içerikleri indirebilir.
 
-![OgretmenAnasayfa](https://github.com/user-attachments/assets/967317f5-b6a4-47ea-8626-de3879f7d93e)  ![OgrenciAnasayfa](https://github.com/user-attachments/assets/0b578cf7-8927-4b20-b2f5-b503bd92fca4)
+<img width="300" alt="OgretmenAnasayfa" src="https://github.com/user-attachments/assets/967317f5-b6a4-47ea-8626-de3879f7d93e">  <img width="300" alt="OgretmenAnasayfa" src="https://github.com/user-attachments/assets/0b578cf7-8927-4b20-b2f5-b503bd92fca4">
 
 **- Ders Detay Arayüzü**
 
 Kullanıcılar, bu sayfada seçtikleri dersin detay bilgilerini görüntüleyebilir.
 
-![DersDetay](https://github.com/user-attachments/assets/1d3fcd70-492e-4327-b24e-89df95b7f298)
+<img width="300" alt="OgretmenAnasayfa" src="https://github.com/user-attachments/assets/1d3fcd70-492e-4327-b24e-89df95b7f298">
 
 **- İçerik Detay Arayüzü**
 
 Bu arayüz, kullanıcılara seçtikleri içerik hakkında ayrıntılı bilgi sunar. Kullanıcılar içeriği indirebilir ve detayları inceleyebilir.
 
-![IcerikDetay](https://github.com/user-attachments/assets/e45ccf16-44b9-47e8-9f96-4831aad88462)
+<img width="300" alt="OgretmenAnasayfa" src="https://github.com/user-attachments/assets/e45ccf16-44b9-47e8-9f96-4831aad88462">
 
 **- Öğrenci Profil Arayüzü**
 
 Öğrenciler, bu sayfada profil resimlerini güncelleyebilir ve şifrelerini sıfırlamak için yöneticilerle iletişime geçebilir.
 
-![OgrenciProfil](https://github.com/user-attachments/assets/9617613b-61d1-4df3-97e8-35ffba5379e2)
+<img width="300" alt="OgretmenAnasayfa" src="https://github.com/user-attachments/assets/9617613b-61d1-4df3-97e8-35ffba5379e2">
 
 **- Öğretmen Profil Arayüzü**
 
 Öğretmenler profil resimlerini güncelleyebilir, şifresini sıfırlamak için yöneticilerle iletişime geçebilir. Ayrıca, "Yeni İçerik Paylaş" butonuyla bölümlerindeki öğrencilere içerik paylaşabilir veya "Ders Müfredatı Ekle" butonuyla öğrenciler için ders bilgilendirmeleri yapabilir.
 
-![OgretmenProfil](https://github.com/user-attachments/assets/b253971b-ec9b-40ec-aaba-096d670ca07d)
+<img width="300" alt="OgretmenAnasayfa" src="https://github.com/user-attachments/assets/b253971b-ec9b-40ec-aaba-096d670ca07d">
 
 **- Yeni İçerik Paylaş Arayüzü**
 
 Öğretmenler, içerik adı ve paylaşılacak bölüm/sınıf seçerek cihazlarından bir dosya yükleyebilir ve bu içeriği öğrencilere sunabilir.
 
-![YeniIcerikPaylas](https://github.com/user-attachments/assets/bb757e16-d4d3-4ece-b66e-ca34b9e60bd5)
+<img width="300" alt="OgretmenAnasayfa" src="https://github.com/user-attachments/assets/bb757e16-d4d3-4ece-b66e-ca34b9e60bd5">
 
 **- Ders Müfredatı Ekle Arayüzü**
 
 Öğretmenler, ders adı, hedef bölüm/sınıf, ders günü, başlama ve bitiş saati gibi bilgileri seçerek ders programını öğrencilere sunabilir.
 
-![YeniMufredatPaylas](https://github.com/user-attachments/assets/1b9dc1b3-1f7b-4b33-8c41-d63c31f25482)
+<img width="300" alt="OgretmenAnasayfa" src="https://github.com/user-attachments/assets/1b9dc1b3-1f7b-4b33-8c41-d63c31f25482">
 
 **- Yapay Zeka İşlem Seçme Arayüzü**
 
 Kullanıcılar, bu sayfada yapay zekayı not veya quiz oluşturmak için kullanmak üzere seçim yapabilir.
 
-![YapayZekaSec](https://github.com/user-attachments/assets/681aa6c4-03a4-470d-86a4-75c2003655ff)
+<img width="300" alt="OgretmenAnasayfa" src="https://github.com/user-attachments/assets/681aa6c4-03a4-470d-86a4-75c2003655ff">
 
 **- Yapay Zeka Özet Oluştur Arayüzü**
 
 Kullanıcılar, konu hakkında yapay zekaya soru sorabilir, oluşturulan özet PDF dosyasını indirerek inceleyebilir.
 
-![YapayZekaOzetOlustur](https://github.com/user-attachments/assets/c3fea12a-8c06-4118-8c9b-9023ec7c8c5d)
+<img width="300" alt="OgretmenAnasayfa" src="https://github.com/user-attachments/assets/c3fea12a-8c06-4118-8c9b-9023ec7c8c5d">
 
 **- Yapay Zeka Quiz Oluştur Arayüzü**
 
 Bu arayüz, kullanıcılara yapay zeka ile quiz oluşturma imkanı sunar. Kullanıcılar ders, konu, soru sayısı ve zorluk gibi seçenekleri ayarlayarak quiz oluşturabilir.
 
-![YapayZekaQuizOlustur](https://github.com/user-attachments/assets/18ddfbaa-36c9-4335-9c80-5128b5125652)
+<img width="300" alt="OgretmenAnasayfa" src="https://github.com/user-attachments/assets/18ddfbaa-36c9-4335-9c80-5128b5125652">
+
+---
+
+**- Proje Yönetimi**
+
+Monday.com’u tercih etmemizin temel nedeni, proje yönetiminde görev takibini kolaylaştırarak ekip içi iş birliğini ve verimliliği artırmasıdır. Görevlerin durumu, sorumluları ve son tarihleri gibi bilgilerin tek bir platformda toplanması sayesinde süreci daha şeffaf ve organize bir şekilde yönetebildik. Ayrıca, zaman çizelgeleri, otomasyonlar ve çeşitli entegrasyonlarla iş akışımızı hızlandırarak verimli bir çalışma ortamı oluşturduk.
+
+<img width="947" alt="Ekran Resmi 2024-11-03 21 39 36" src="https://github.com/user-attachments/assets/4d101387-df7d-40bf-a7dc-dc940107ccf2">
+
+---
+
+**- Figma Proje Tasarımı**
+
+<img width="714" alt="Ekran Resmi 2024-11-03 21 35 14" src="https://github.com/user-attachments/assets/8b217c3c-9436-4111-aef4-6b1a3f45b0e1">
 
 
 
