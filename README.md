@@ -133,7 +133,7 @@ Monday.com’u tercih etmemizin temel nedeni, proje yönetiminde görev takibini
 
 **- Firebase**
 
-Oluşturduğumuz mail ve şifreyi kullanarak uygulamamıza giriş yapabilir, fonksiyonları test edebilirsiniz. Daha fazla hesap erişimi için iletişime geçebilirsiniz.
+Eklediğimiz APK dosyasını indirdikten sonra oluşturduğumuz mail ve şifreyi kullanarak uygulamamıza giriş yapabilir, fonksiyonları test edebilirsiniz. Daha fazla hesap erişimi için iletişime geçebilirsiniz.
 
 📧 : sinavodevsistemideneme@gmail.com
 🔑 : denemepassword
