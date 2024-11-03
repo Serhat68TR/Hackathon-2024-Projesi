@@ -53,7 +53,7 @@ Yapay Zeka Desteği: Gemini AI
 
 Kullanıcı odaklı bir giriş arayüzüdür. Kullanıcılar, e-posta ve şifre bilgilerini girerek uygulamaya erişim sağlayabilir. Şifresini unutan kullanıcılar "Şifremi Unuttum" butonuna tıklayarak yöneticilerle iletişime geçebilir.
 
-<img width="300" alt="GirisYap" src="https://github.com/user-attachments/assets/dcb2b8d2-bcd9-4a8a-a6ea-3b0a0d51b207">
+<img width="300" alt="GirisYap" src="https://github.com/user-attachments/assets/7eeeba4a-d187-41d1-b89b-f7e0625afe7f">
 
 **- Öğretmen & Öğrenci Anasayfa Arayüzü**
 
