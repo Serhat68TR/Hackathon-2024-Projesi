@@ -19,6 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
+        android:backgroundTint="#4169E1"
         android:text="Detay" />
 
 </androidx.cardview.widget.CardView>

@@ -22,14 +22,14 @@
 
     <TextView
         android:id="@+id/hosgeldiniz_login"
-        android:layout_width="123dp"
-        android:layout_height="25dp"
+        android:layout_width="148dp"
+        android:layout_height="46dp"
         android:layout_marginStart="144dp"
         android:layout_marginTop="25dp"
         android:layout_marginEnd="144dp"
         android:fontFamily="@font/amaranth_bold"
         android:text="HOŞGELDİNİZ"
-        android:textSize="20sp"
+        android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/email_login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -73,6 +73,7 @@
         android:layout_height="48dp"
         android:layout_marginTop="300dp"
         android:text="Giriş Yap"
+        android:backgroundTint="#4169E1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -98,11 +99,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="3dp"
+        android:backgroundTint="#4682B4"
         android:text="Şifremi Unuttum :("
         app:layout_constraintBottom_toTopOf="@+id/giris_yap_login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password_login"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.35" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

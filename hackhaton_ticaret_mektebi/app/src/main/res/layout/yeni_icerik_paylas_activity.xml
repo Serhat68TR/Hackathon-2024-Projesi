@@ -184,6 +184,7 @@
                         android:id="@+id/yeni_icerik_paylas_dosyaSec"
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
+                        android:backgroundTint="#4169E1"
                         android:text="Dosya Seç" />
                     <!-- Boş alan bırakmak için View -->
                     <View
@@ -196,6 +197,7 @@
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end"
+                        android:backgroundTint="#4169E1"
                         android:scrollIndicators="right"
                         android:text="Paylaş" />
 
