@@ -121,16 +121,28 @@ Bu arayüz, kullanıcılara yapay zeka ile quiz oluşturma imkanı sunar. Kullan
 
 Monday.com’u tercih etmemizin temel nedeni, proje yönetiminde görev takibini kolaylaştırarak ekip içi iş birliğini ve verimliliği artırmasıdır. Görevlerin durumu, sorumluları ve son tarihleri gibi bilgilerin tek bir platformda toplanması sayesinde süreci daha şeffaf ve organize bir şekilde yönetebildik. Ayrıca, zaman çizelgeleri, otomasyonlar ve çeşitli entegrasyonlarla iş akışımızı hızlandırarak verimli bir çalışma ortamı oluşturduk.
 
-<img width="947" alt="Ekran Resmi 2024-11-03 21 39 36" src="https://github.com/user-attachments/assets/4d101387-df7d-40bf-a7dc-dc940107ccf2">
+<img width="900" alt="Ekran Resmi 2024-11-03 21 39 36" src="https://github.com/user-attachments/assets/4d101387-df7d-40bf-a7dc-dc940107ccf2">
 
 ---
 
 **- Figma Proje Tasarımı**
 
-<img width="714" alt="Ekran Resmi 2024-11-03 21 35 14" src="https://github.com/user-attachments/assets/8b217c3c-9436-4111-aef4-6b1a3f45b0e1">
+<img width="700" alt="Ekran Resmi 2024-11-03 21 35 14" src="https://github.com/user-attachments/assets/8b217c3c-9436-4111-aef4-6b1a3f45b0e1">
 
+---
 
+**- Firebase**
 
+Oluşturduğumuz mail ve şifreyi kullanarak uygulamamıza giriş yapabilir, fonksiyonları test edebilirsiniz. Daha fazla hesap erişimi için iletişime geçebilirsiniz.
+
+📧 : sinavodevsistemideneme@gmail.com
+🔑 : denemepassword
+
+<img width="550" alt="Ekran Resmi 2024-11-03 23 16 39" src="https://github.com/user-attachments/assets/9cf3b3c2-8438-4023-98ea-c7a050bdb128">
+
+<img width="450" alt="Ekran Resmi 2024-11-03 23 18 13" src="https://github.com/user-attachments/assets/8215bfb0-d5b0-4c87-8e1a-d5d719a48a8f">
+
+<img width="800" alt="Ekran Resmi 2024-11-03 23 22 32" src="https://github.com/user-attachments/assets/1edf723b-a3da-4991-b8f3-286979c060f3">
 
 
 
