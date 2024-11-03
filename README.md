@@ -1,4 +1,4 @@
-**Öğrenci Destekli Soru Hazırlama ve Çıktı Alma Mobil Uygulaması**
+**Yapay Zeka Destekli Eğitim Takibi ve Araştırma Mobil Uygulaması**
 
 
 **Proje Amacı 🎯**
