@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/logo_login"
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+        android:layout_marginStart="141dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="142dp"
+        app:layout_constraintBottom_toTopOf="@+id/hosgeldiniz_login"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo" />
+
+    <TextView
+        android:id="@+id/hosgeldiniz_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="144dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="144dp"
+        android:fontFamily="@font/amaranth_bold"
+        android:text="HOŞGELDİNİZ"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/email_login"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logo_login" />
+
+    <EditText
+        android:id="@+id/email_login"
+        android:layout_width="210dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="25dp"
+        android:ems="10"
+        android:hint="E-Posta Adresi"
+        android:inputType="textEmailAddress"
+        app:layout_constraintBottom_toTopOf="@+id/password_login"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hosgeldiniz_login" />
+
+    <EditText
+        android:id="@+id/password_login"
+        android:layout_width="210dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="300dp"
+        android:ems="10"
+        android:hint="Parola"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/email_login" />
+
+    <Button
+        android:id="@+id/giris_yap_login"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginTop="300dp"
+        android:backgroundTint="#4169E1"
+        android:text="Giriş Yap"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.616" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="19dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="650dp"
+        android:layout_marginEnd="101dp"
+        android:text=" Copyright © Tüm Hakları Saklıdır."
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/main_activity_sifremi_unuttum_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="3dp"
+        android:backgroundTint="#4682B4"
+        android:text="Şifremi Unuttum :("
+        app:layout_constraintBottom_toTopOf="@+id/giris_yap_login"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/password_login"
+        app:layout_constraintVertical_bias="0.35" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
