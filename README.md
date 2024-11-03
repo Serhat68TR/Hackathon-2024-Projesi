@@ -27,7 +27,7 @@ Görev Takibi : Yapay zeka öğrencinin derslerini ve ödevlerini inceleyerek pl
 
 Öğrenme Yol Haritası : Başarı oranına göre hangi konulara odaklanılması gerektiğini belirler.
 
-Uygulana Kaydı : Öğretmenler, uygulama üzerinden bölümlere öğrenci kaydı gerçekleştirir.
+Uygulama Kaydı : Öğretmenler, uygulama üzerinden bölümlere öğrenci kaydı gerçekleştirir.
 
 Çakışma Engelleme : Derslere gün ve saat sınırı eklenilir, çakışmalar önlenir.
 
