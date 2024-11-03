@@ -3,7 +3,7 @@
 
 **Proje Amacı 🎯**
 
-Bu proje, öğrencilerin ders çalışmasını ve sınav hazırlığını kolaylaştırmak, gelecekteki derslerini ve öğretmenleri tarafından paylaşılan içerikleri takip edebilmek amacıyla geliştirilen bir eğitim destekli mobil uygulamadır. Uygulama, kullanıcıların belirledikleri ders ve konuya özel olarak yapay zeka destekli sorular hazırlamalarına ve bu soruları PDF formatında çıktı almalarına olanak tanır.
+Bu proje, öğrencilerin ders çalışmasını ve sınav hazırlığını kolaylaştırmak, gelecekteki derslerini ve öğretmenleri tarafından paylaşılan içerikleri takip edebilmek amacıyla geliştirilen bir yapay zeka destekli mobil uygulamadır. Uygulama, kullanıcıların belirledikleri ders ve konuya özel olarak yapay zeka destekli sorular hazırlamalarına ve bu soruları PDF formatında çıktı almalarına olanak tanır.
 
 ---
 
@@ -114,6 +114,20 @@ Kullanıcılar, konu hakkında yapay zekaya soru sorabilir, oluşturulan özet P
 Bu arayüz, kullanıcılara yapay zeka ile quiz oluşturma imkanı sunar. Kullanıcılar ders, konu, soru sayısı ve zorluk gibi seçenekleri ayarlayarak quiz oluşturabilir.
 
 <img width="300" alt="OgretmenAnasayfa" src="https://github.com/user-attachments/assets/18ddfbaa-36c9-4335-9c80-5128b5125652">
+
+---
+
+**- Proje Yönetimi**
+
+Monday.com’u tercih etmemizin temel nedeni, proje yönetiminde görev takibini kolaylaştırarak ekip içi iş birliğini ve verimliliği artırmasıdır. Görevlerin durumu, sorumluları ve son tarihleri gibi bilgilerin tek bir platformda toplanması sayesinde süreci daha şeffaf ve organize bir şekilde yönetebildik. Ayrıca, zaman çizelgeleri, otomasyonlar ve çeşitli entegrasyonlarla iş akışımızı hızlandırarak verimli bir çalışma ortamı oluşturduk.
+
+<img width="947" alt="Ekran Resmi 2024-11-03 21 39 36" src="https://github.com/user-attachments/assets/4d101387-df7d-40bf-a7dc-dc940107ccf2">
+
+---
+
+**- Figma Proje Tasarımı**
+
+<img width="714" alt="Ekran Resmi 2024-11-03 21 35 14" src="https://github.com/user-attachments/assets/8b217c3c-9436-4111-aef4-6b1a3f45b0e1">
 
 
 
