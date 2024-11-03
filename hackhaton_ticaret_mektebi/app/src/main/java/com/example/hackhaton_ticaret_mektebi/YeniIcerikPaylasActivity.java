@@ -20,7 +20,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 import com.bumptech.glide.Glide;
 import com.example.hackhaton_ticaret_mektebi.Models.Content;
 import com.example.hackhaton_ticaret_mektebi.Models.Student;
@@ -143,6 +145,10 @@ public class YeniIcerikPaylasActivity extends AppCompatActivity {
         contentSharedDateEditText = findViewById(R.id.yeni_icerik_paylasilan_tarih_dt);
         contentDepartmentEditText = findViewById(R.id.yeni_icerik_icerik_bolum_adi_dt);
         contentSizeEditText = findViewById(R.id.yeni_icerik_icerik_sayfa_boyut_dt);
+
+        // Tarihi otomatik olarak al ve alanı doldur
+        String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+        contentSharedDateEditText.setText(currentDate);
 
         yeni_icerik_ad_soyad_text = findViewById(R.id.yeni_icerik_ad_soyad_text);
         Button selectFileButton = findViewById(R.id.yeni_icerik_paylas_dosyaSec);

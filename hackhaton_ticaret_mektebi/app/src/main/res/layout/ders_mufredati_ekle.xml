@@ -127,7 +127,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="text" />
+                        android:inputType="text"
+                        android:text="Bilgisayar Mühendisliği-" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -208,9 +209,9 @@
 
         <TextView
             android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Lütfen Tarih ve Saat Bilgilerini Belirtilen Formatta Giriniz." />
+            android:layout_width="365dp"
+            android:layout_height="80dp"
+            android:text="Lütfen Tarih ve Saat Bilgilerini Belirtilen Formatta Giriniz. Bölüm Adını Yazdktan Sonra Sınıf Numarası Ekleyiniz." />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
