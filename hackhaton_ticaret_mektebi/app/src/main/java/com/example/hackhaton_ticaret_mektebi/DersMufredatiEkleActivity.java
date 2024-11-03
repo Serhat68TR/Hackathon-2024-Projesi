@@ -46,6 +46,7 @@ public class DersMufredatiEkleActivity extends AppCompatActivity {
     String userPhotoUrl;
     ImageButton gemini;
     ImageView ders_mufredati_pp;
+    EditText ders_mufredati_department_dt;
     EditText ders_mufredati_dersin_adi_dt, ders_mufredati_ders_baslama_adi_dt, ders_mufredati_ders_bitis_dt, ders_mufredati_dersin_tarihi_dt;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,9 +73,9 @@ public class DersMufredatiEkleActivity extends AppCompatActivity {
       ders_mufredati_ders_baslama_adi_dt = findViewById(R.id.ders_mufredati_ders_baslama_adi_dt);
       ders_mufredati_ders_bitis_dt = findViewById(R.id.ders_mufredati_ders_bitis_dt);
       ders_mufredati_dersin_hocasi_dt = findViewById(R.id.ders_mufredati_dersin_hocasi_dt);
-
-      ders_mufredati_ad_soyad_text=findViewById(R.id.ders_mufredati_ad_soyad_text); // BURASI HATALI. DEPARTMAN ADI ÇEKİLECEK.
-
+      ders_mufredati_dersin_adi_dt = findViewById(R.id.ders_mufredati_dersin_adi_dt);
+      ders_mufredati_ad_soyad_text=findViewById(R.id.ders_mufredati_ad_soyad_text);
+      ders_mufredati_department_dt=findViewById(R.id.ders_mufredati_department_dt);
       ders_mufredati_paylas_btn = findViewById(R.id.ders_mufredati_paylas_btn);
 
       courseDatabaseRef = FirebaseDatabase.getInstance().getReference("courses");
@@ -87,68 +88,6 @@ public class DersMufredatiEkleActivity extends AppCompatActivity {
 
       ders_mufredati_paylas_btn.setOnClickListener(v -> shareNewCourseFromDatabase());
 
-        /*
-         ders_mufredati_paylas_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Firebase veritabanı referansını al
-                FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference coursesRef = database.getReference("courses");
-
-                // Mevcut içerik ID'lerini almak için contents düğümünü dinle
-                coursesRef.get().addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        // Mevcut en yüksek contentID'yi bulmak için bir değişken tanımla
-                        int maxCourseID = 0;
-
-                        // Mevcut tüm düğümleri döngüyle kontrol et
-                        for (DataSnapshot snapshot : task.getResult().getChildren()) {
-                            String key = snapshot.getKey();
-                            if (key != null && key.startsWith("courseID")) {
-                                // contentID'den sonraki sayıyı al ve int'e çevir
-                                int courseNumber = Integer.parseInt(key.replace("courseID", ""));
-                                if (courseNumber > maxCourseID) {
-                                    maxCourseID = courseNumber;
-                                }
-                            }
-                        }
-
-                        // Yeni contentID oluştur
-                        String newCourseID = "courseID" + (maxCourseID + 1);
-
-                        //bunları düzenlersin
-                        //courseDepartment_str = editTextVeri.getText().toString();
-
-                        // Yeni verileri eklemek için bir HashMap oluştur
-                        Map<String, Object> newCourseData = new HashMap<>();
-                        newCourseData.put("courseName", "Yeni Müfredat"); // Örnek veri
-                        newCourseData.put("courseDepartment", "Serhat Mühendisliği"); // Örnek veri
-                        newCourseData.put("courseStartTime", "2024-25-01"); // Örnek veri
-                        newCourseData.put("teacherID", "6vAn2g4aQ4cHDjv67izOUt9sAih2"); // Örnek veri
-                        // Yeni contentID ile veriyi Firebase'e yaz
-                        coursesRef.child(newCourseID).setValue(newCourseData).addOnCompleteListener(writeTask -> {
-                            if (writeTask.isSuccessful()) {
-                                // Veri başarıyla eklendiğinde yapılacak işlem
-                                System.out.println("Yeni içerik başarıyla eklendi: " + newCourseID);
-
-                                // UserMainActivity'ye geçiş yap
-                                Intent intent = new Intent(DersMufredatiEkleActivity.this, UserMainActivity.class);
-                                startActivity(intent);
-                                finish(); // Kullanıcı geri basarsa login ekranına dönmesin diye
-                            } else {
-                                // Hata durumunda yapılacak işlem
-                                System.err.println("Veri ekleme hatası: " + writeTask.getException());
-                            }
-                        });
-                    } else {
-                        // Hata durumunda yapılacak işlem
-                        System.err.println("Mevcut içerikler okunurken hata oluştu: " + task.getException());
-                    }
-                });
-            }
-         });
-        */
-
     }
 
     public void shareNewCourseFromDatabase() {
@@ -156,7 +95,7 @@ public class DersMufredatiEkleActivity extends AppCompatActivity {
         String courseProvider = ders_mufredati_dersin_hocasi_dt.getText().toString().trim();
         String courseDate = ders_mufredati_dersin_tarihi_dt.getText().toString().trim();
         String courseEndTime = ders_mufredati_ders_bitis_dt.getText().toString().trim();
-        String courseDepartment = ders_mufredati_ad_soyad_text.getText().toString().trim(); // COURSEDEPARTMAN == OTURUM AÇAN HOCANIN DEPARTMANI
+        String courseDepartment = ders_mufredati_department_dt.getText().toString().trim(); // COURSEDEPARTMAN == OTURUM AÇAN HOCANIN DEPARTMANI
         String courseStartTime = ders_mufredati_ders_baslama_adi_dt.getText().toString().trim();
 
         if (!courseName.isEmpty() && !courseProvider.isEmpty() && !courseDate.isEmpty() && !courseDepartment.isEmpty() && !courseStartTime.isEmpty() && !courseEndTime.isEmpty()) {
@@ -189,7 +128,7 @@ public class DersMufredatiEkleActivity extends AppCompatActivity {
 
                             userName = teacher.getNameSurname();
                             userPhotoUrl = teacher.getProfilePictureURL();
-
+                            userDepartment = teacher.getUserDepartment();
                             ders_mufredati_dersin_hocasi_dt.setText(userName);
                             ders_mufredati_ad_soyad_text.setText(userName);
                             if (userPhotoUrl != null) {
@@ -197,7 +136,7 @@ public class DersMufredatiEkleActivity extends AppCompatActivity {
                             } else {
                                 Log.e("ImageLoadError", "Profil resmi URL'si null."); // URL'nin null olup olmadığını kontrol et
                             }
-                            ders_mufredati_ad_soyad_text.setText("Hoşgeldin Öğretmenim"+" " + userName);
+                            ders_mufredati_ad_soyad_text.setText(userName);
                             Log.d("UserInfo", "Teacher - User ID: " + userID + ", Name: " + userName + ", Department: " + userDepartment + ", Photo URL: " + userPhotoUrl);
                         }
                     } else {
@@ -218,7 +157,7 @@ public class DersMufredatiEkleActivity extends AppCompatActivity {
                                         } else {
                                             Log.e("ImageLoadError", "Profil resmi URL'si null."); // URL'nin null olup olmadığını kontrol et
                                         }
-                                        ders_mufredati_ad_soyad_text.setText("Hoşgeldin Öğrencim "+ " " + userName);
+                                        ders_mufredati_ad_soyad_text.setText(userName);
                                         Log.d("UserInfo", "Student - User ID: " + userID + ", Name: " + userName + ", Class: " + ", Photo URL: " + userPhotoUrl);
                                     }
                                 } else {

@@ -88,7 +88,7 @@ public class GeminiQuizActivity extends AppCompatActivity {
                         try {
                             resultText = result.getText();
                             cevap = resultText;
-                            runOnUiThread(() -> sonucText.setText(cevap)); // Update the TextView with the result
+                            runOnUiThread(() -> sonucText.setText("PDF başarıyla oluşturuldu")); // Update the TextView with the result
                             createPDF();
                         } catch (Exception e) {
                             runOnUiThread(() -> Toast.makeText(getApplicationContext(), "Bir hata oluştu", Toast.LENGTH_SHORT).show());

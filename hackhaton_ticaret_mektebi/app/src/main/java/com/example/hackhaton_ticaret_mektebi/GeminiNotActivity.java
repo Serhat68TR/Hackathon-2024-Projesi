@@ -81,7 +81,7 @@ public class GeminiNotActivity extends AppCompatActivity {
             @Override
             public void onSuccess(GenerateContentResponse result) {
                 resultText = result.getText();
-                runOnUiThread(() -> sonuc.setText(resultText));
+                runOnUiThread(() -> sonuc.setText("PDF başarıyla oluşturuldu"));
                 requestStoragePermissionAndCreatePDF();
             }
 

@@ -93,7 +93,7 @@ public class UserMainActivity extends AppCompatActivity {
 
 
         getUserInfoFromDatabase();
-       // getContentDepartmentsFromDatabase();
+       //getContentDepartmentsFromDatabase();
         getCourseFromDatabase();
         getContentFromDatabase();
         user_main_pp.setOnClickListener(new View.OnClickListener() {
@@ -110,7 +110,6 @@ public class UserMainActivity extends AppCompatActivity {
                                 // Eğer kullanıcı teacher ise OgretmenArayuzActivity'i aç
                                 Intent intent = new Intent(UserMainActivity.this, OgretmenArayuzActivity.class);
                                 startActivity(intent);
-                                finish(); // Kullanıcı geri basarsa login ekranına dönmesin diye
                             } else {
                                 // Eğer kullanıcı teacher değilse, student'ı kontrol et
                                 DatabaseReference studentRef = FirebaseDatabase.getInstance().getReference("students").child(userID);
@@ -121,7 +120,6 @@ public class UserMainActivity extends AppCompatActivity {
                                             // Eğer kullanıcı student ise OgrenciArayuzActivity'i aç
                                             Intent intent = new Intent(UserMainActivity.this, OgrenciArayuzActivity.class);
                                             startActivity(intent);
-                                            finish(); // Kullanıcı geri basarsa login ekranına dönmesin diye
                                         } else {
                                             // Kullanıcı ne öğretmen ne de öğrenci
                                             Log.d("UserInfo", "Kullanıcı ne öğretmen ne de öğrenci.");
@@ -231,7 +229,7 @@ public class UserMainActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot teacherSnapshot) {
                 if (teacherSnapshot.exists()) {
                     // Kullanıcı öğretmen
-                    fetchContentsByProvider(userID);
+                    fetchContentsByProvider(userName);
                 } else {
                     // Öğretmen değilse öğrencilik kontrol ediliyor
                     refStudents.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -393,7 +391,6 @@ public class UserMainActivity extends AppCompatActivity {
                                     courseItemList.clear();
                                     for (DataSnapshot courseSnapshot : snapshot.getChildren()) {
                                         String courseDepartment = courseSnapshot.child("courseDepartment").getValue(String.class);
-
                                         if (department.equals(courseDepartment)) {
                                             Course courseItem = createCourseFromSnapshot(courseSnapshot);
                                             courseItemList.add(courseItem);
@@ -418,7 +415,7 @@ public class UserMainActivity extends AppCompatActivity {
                                 public void onDataChange(@NonNull DataSnapshot teacherSnapshot) {
                                     if (teacherSnapshot.exists()) {
                                         // Kullanıcı öğretmense, öğretmenin kurslarını çek
-                                        fetchCoursesByTeacher(userID);
+                                        fetchCoursesByTeacher(userName);
                                     } else {
                                         // Öğrenci ise departmanına göre kursları çek
                                         refStudents.addListenerForSingleValueEvent(new ValueEventListener() {

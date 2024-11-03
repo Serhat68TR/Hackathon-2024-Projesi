@@ -89,6 +89,55 @@ public class OgrenciArayuzActivity extends AppCompatActivity {
             AlertDialog alertDialog = builder.create();
             alertDialog.show();
         });
+        userProfilePictureImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                user = getCurrentUser();
+                if (user != null) {
+                    String userID = user.getUid();
+                    DatabaseReference teacherRef = FirebaseDatabase.getInstance().getReference("teachers").child(userID);
+                    teacherRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.exists()) {
+                                // Eğer kullanıcı teacher ise OgretmenArayuzActivity'i aç
+                                Intent intent = new Intent(OgrenciArayuzActivity.this, OgretmenArayuzActivity.class);
+                                startActivity(intent);
+                            } else {
+                                // Eğer kullanıcı teacher değilse, student'ı kontrol et
+                                DatabaseReference studentRef = FirebaseDatabase.getInstance().getReference("students").child(userID);
+                                studentRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot studentSnapshot) {
+                                        if (studentSnapshot.exists()) {
+                                            // Eğer kullanıcı student ise OgrenciArayuzActivity'i aç
+                                            Intent intent = new Intent(OgrenciArayuzActivity.this, OgrenciArayuzActivity.class);
+                                            startActivity(intent);
+                                        } else {
+                                            // Kullanıcı ne öğretmen ne de öğrenci
+                                            Log.d("UserInfo", "Kullanıcı ne öğretmen ne de öğrenci.");
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(DatabaseError databaseError) {
+                                        Log.e("UserInfo", "Error: " + databaseError.getMessage());
+                                    }
+                                });
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+                            Log.e("UserInfo", "Error: " + databaseError.getMessage());
+                        }
+                    });
+                } else {
+                    Log.d("UserInfo", "No user is signed in.");
+                }
+            }
+        });
+
 
     }
 

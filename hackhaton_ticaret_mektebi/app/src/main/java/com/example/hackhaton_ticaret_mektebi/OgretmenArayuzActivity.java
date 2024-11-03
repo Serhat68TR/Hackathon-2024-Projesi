@@ -91,6 +91,55 @@ public class OgretmenArayuzActivity extends AppCompatActivity {
             }
         });
 
+        userProfilePictureImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                user = getCurrentUser();
+                if (user != null) {
+                    String userID = user.getUid();
+                    DatabaseReference teacherRef = FirebaseDatabase.getInstance().getReference("teachers").child(userID);
+                    teacherRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.exists()) {
+                                // Eğer kullanıcı teacher ise OgretmenArayuzActivity'i aç
+                                Intent intent = new Intent(OgretmenArayuzActivity.this, OgretmenArayuzActivity.class);
+                                startActivity(intent);
+                            } else {
+                                // Eğer kullanıcı teacher değilse, student'ı kontrol et
+                                DatabaseReference studentRef = FirebaseDatabase.getInstance().getReference("students").child(userID);
+                                studentRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot studentSnapshot) {
+                                        if (studentSnapshot.exists()) {
+                                            // Eğer kullanıcı student ise OgrenciArayuzActivity'i aç
+                                            Intent intent = new Intent(OgretmenArayuzActivity.this, OgrenciArayuzActivity.class);
+                                            startActivity(intent);
+                                        } else {
+                                            // Kullanıcı ne öğretmen ne de öğrenci
+                                            Log.d("UserInfo", "Kullanıcı ne öğretmen ne de öğrenci.");
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(DatabaseError databaseError) {
+                                        Log.e("UserInfo", "Error: " + databaseError.getMessage());
+                                    }
+                                });
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+                            Log.e("UserInfo", "Error: " + databaseError.getMessage());
+                        }
+                    });
+                } else {
+                    Log.d("UserInfo", "No user is signed in.");
+                }
+            }
+        });
+
 
 
         changeProfilePicButton.setOnClickListener(v -> openGallery());
@@ -145,7 +194,7 @@ public class OgretmenArayuzActivity extends AppCompatActivity {
                             } else {
                                 Log.e("ImageLoadError", "Profil resmi URL'si null."); // URL'nin null olup olmadığını kontrol et
                             }
-                            ogretmen_arayuz_ad_soyad_text.setText("Hoşgeldin Öğretmenim"+" " + userName);
+                            ogretmen_arayuz_ad_soyad_text.setText(userName);
                             Log.d("UserInfo", "Teacher - User ID: " + userID + ", Name: " + userName + ", Department: " + userDepartment + ", Photo URL: " + userPhotoUrl);
                         }
                     } else {

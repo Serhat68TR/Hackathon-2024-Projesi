@@ -50,7 +50,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/ders_mufredati_card"
             android:layout_width="350dp"
-            android:layout_height="300dp"
+            android:layout_height="380dp"
             android:layout_alignWithParentIfMissing="false"
             android:layout_alignParentLeft="false"
             android:layout_alignParentTop="false"
@@ -106,6 +106,28 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="A" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ders_mufredati_department_linear_h"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/ders_mufredati_department_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Bölümü Ve Sınıfı :" />
+
+                    <EditText
+                        android:id="@+id/ders_mufredati_department_dt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:ems="10"
+                        android:inputType="text" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -170,6 +192,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="12:00" />
+
                 </LinearLayout>
 
                 <Button

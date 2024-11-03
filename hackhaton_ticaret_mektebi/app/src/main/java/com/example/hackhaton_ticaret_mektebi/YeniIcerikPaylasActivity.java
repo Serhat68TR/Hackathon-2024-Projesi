@@ -249,7 +249,7 @@ public class YeniIcerikPaylasActivity extends AppCompatActivity {
                             } else {
                                 Log.e("ImageLoadError", "Profil resmi URL'si null."); // URL'nin null olup olmadığını kontrol et
                             }
-                            yeni_icerik_ad_soyad_text.setText("Hoşgeldin Öğretmenim"+" " + userName);
+                            yeni_icerik_ad_soyad_text.setText(userName);
                             Log.d("UserInfo", "Teacher - User ID: " + userID + ", Name: " + userName + ", Department: " + userDepartment + ", Photo URL: " + userPhotoUrl);
                         }
                     } else {
@@ -270,7 +270,7 @@ public class YeniIcerikPaylasActivity extends AppCompatActivity {
                                         } else {
                                             Log.e("ImageLoadError", "Profil resmi URL'si null."); // URL'nin null olup olmadığını kontrol et
                                         }
-                                        yeni_icerik_ad_soyad_text.setText("Hoşgeldin Öğrencim "+ " " + userName);
+                                        yeni_icerik_ad_soyad_text.setText(userName);
                                         Log.d("UserInfo", "Student - User ID: " + userID + ", Name: " + userName + ", Class: " + ", Photo URL: " + userPhotoUrl);
                                     }
                                 } else {
